@@ -1,0 +1,15 @@
+{
+  "name": "nlw-proffy",
+  "private": true,
+  "version": "1.0.0",
+  "repository": "https://github.com/powilliam/nlw-proffy.git",
+  "author": "William Porto <powilliam19@gmail.com>",
+  "license": "MIT",
+  "workspaces": {
+    "packages": [
+      "packages/web",
+      "packages/mobile",
+      "packages/server"
+    ]
+  }
+}
