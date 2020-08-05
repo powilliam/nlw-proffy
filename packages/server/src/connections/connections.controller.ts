@@ -16,7 +16,7 @@ export class ConnectionsController {
 
   @Post(':teacherId')
   async createConnection(@Param('teacherId') teacherId: string) {
-    return await this.connectionsService.create({
+    await this.connectionsService.create({
       teacher: await this.teachersService.findById(teacherId),
     });
   }
