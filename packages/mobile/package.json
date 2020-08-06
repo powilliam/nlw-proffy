@@ -1,5 +1,5 @@
 {
-  "name": "@nlw-proffy/mobile",
+  "name": "@proffy/mobile",
   "version": "1.0.0",
   "main": "__generated__/AppEntry.js",
   "scripts": {

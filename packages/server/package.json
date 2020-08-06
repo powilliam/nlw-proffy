@@ -1,6 +1,6 @@
 {
-  "name": "server",
-  "version": "0.0.1",
+  "name": "@proffy/server",
+  "version": "1.0.0",
   "description": "",
   "author": "",
   "private": true,
@@ -52,8 +52,7 @@
     "ts-jest": "26.1.0",
     "ts-loader": "^6.2.1",
     "ts-node": "^8.6.2",
-    "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.7.4"
+    "tsconfig-paths": "^3.9.0"
   },
   "jest": {
     "moduleFileExtensions": [

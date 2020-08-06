@@ -1,5 +1,5 @@
 {
-  "name": "nlw-proffy",
+  "name": "proffy",
   "private": true,
   "version": "1.0.0",
   "repository": "https://github.com/powilliam/nlw-proffy.git",
@@ -11,5 +11,8 @@
       "packages/mobile",
       "packages/server"
     ]
+  },
+  "devDependencies": {
+    "typescript": "~3.9.5"
   }
 }
