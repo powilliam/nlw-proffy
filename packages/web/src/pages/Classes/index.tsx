@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useMemo } from "react";
 import { FormHandles, SubmitHandler } from "@unform/core";
 import { Form } from "@unform/web";
 
@@ -48,6 +48,36 @@ const Classes: React.FC = () => {
     []
   );
 
+  const uncontroledSelectSubjectOptions = useMemo(
+    () => [
+      { value: "Artes", label: "Artes" },
+      { value: "Educação Física", label: "Educação Física" },
+      { value: "Química", label: "Química" },
+      { value: "Física", label: "Física" },
+      { value: "Matemática", label: "Matemática" },
+      { value: "Português", label: "Português" },
+      { value: "Inglês", label: "Inglês" },
+      { value: "História", label: "História" },
+      { value: "Geografia", label: "Geografia" },
+      { value: "Filosofia", label: "Filosofia" },
+      { value: "Sociologia", label: "Sociologia" },
+    ],
+    []
+  );
+
+  const uncontrolledSelectWeekdayOptions = useMemo(
+    () => [
+      { value: "0", label: "Domingo" },
+      { value: "1", label: "Segunda-feira" },
+      { value: "2", label: "Terça-feira" },
+      { value: "3", label: "Quarta-feira" },
+      { value: "4", label: "Quínta-feira" },
+      { value: "5", label: "Sexta-feira" },
+      { value: "6", label: "Sábado" },
+    ],
+    []
+  );
+
   return (
     <Container id="page-teacher-list">
       <PageHeader title="Estes são os proffys disponíveis.">
@@ -55,32 +85,12 @@ const Classes: React.FC = () => {
           <UncontrolledSelect
             name="subject"
             label="Matéria"
-            options={[
-              { value: "Artes", label: "Artes" },
-              { value: "Educação Física", label: "Educação Física" },
-              { value: "Química", label: "Química" },
-              { value: "Física", label: "Física" },
-              { value: "Matemática", label: "Matemática" },
-              { value: "Português", label: "Português" },
-              { value: "Inglês", label: "Inglês" },
-              { value: "História", label: "História" },
-              { value: "Geografia", label: "Geografia" },
-              { value: "Filosofia", label: "Filosofia" },
-              { value: "Sociologia", label: "Sociologia" },
-            ]}
+            options={uncontroledSelectSubjectOptions}
           />
           <UncontrolledSelect
             name="weekDay"
             label="Dia da semana"
-            options={[
-              { value: "0", label: "Domingo" },
-              { value: "1", label: "Segunda-feira" },
-              { value: "2", label: "Terça-feira" },
-              { value: "3", label: "Quarta-feira" },
-              { value: "4", label: "Quínta-feira" },
-              { value: "5", label: "Sexta-feira" },
-              { value: "6", label: "Sábado" },
-            ]}
+            options={uncontrolledSelectWeekdayOptions}
           />
           <UncontrolledInput name="time" label="Hora" type="time" />
           <button type="submit">Buscar</button>
