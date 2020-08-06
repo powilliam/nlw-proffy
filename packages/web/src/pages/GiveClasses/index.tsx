@@ -9,8 +9,6 @@ import PageHeader from "../../components/PageHeader";
 import UncontrolledInput from "../../components/UncontrolledInput";
 import UncontrolledTextarea from "../../components/UncontrolledTextarea";
 import UncontrolledSelect from "../../components/UncontrolledSelect";
-import Select from "../../components/Select";
-import Input from "../../components/Input";
 
 import Warning from "../../assets/images/icons/warning.svg";
 
@@ -136,24 +134,24 @@ const GiveClasses: React.FC = () => {
 
             {schedules?.map((_, index) => (
               <div key={index} className="schedule-item">
-                <Select
-                  htmlFor="weekDay"
+                <UncontrolledSelect
+                  name={`schedules[${index}].weekDay`}
                   label="Dia da semana"
                   onChange={(e) =>
                     handleUpdateScheduleItem(index, "weekDay", e.target.value)
                   }
                   options={selectWeekdayOptions}
                 />
-                <Input
-                  htmlFor="from"
+                <UncontrolledInput
+                  name={`schedules[${index}].from`}
                   label="Das"
                   type="time"
                   onChange={(e) =>
                     handleUpdateScheduleItem(index, "from", e.target.value)
                   }
                 />
-                <Input
-                  htmlFor="to"
+                <UncontrolledInput
+                  name={`schedules[${index}].to`}
                   label="Até"
                   type="time"
                   onChange={(e) =>
