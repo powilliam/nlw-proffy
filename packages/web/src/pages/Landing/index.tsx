@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
+import useSWR from "swr";
 
 import { getTotalConnections } from "../../services/api";
 
@@ -12,15 +13,9 @@ import PurpleHeart from "../../assets/images/icons/purple-heart.svg";
 import { Container } from "./styles";
 
 const Landing: React.FC = () => {
-  const [totalConnections, setTotalConnections] = useState(0);
+  const { data: response } = useSWR("connections", () => getTotalConnections());
 
-  useEffect(() => {
-    getTotalConnections().then((response) => {
-      const { total } = response.data;
-
-      setTotalConnections(total);
-    });
-  }, []);
+  const totalConnections = useMemo(() => response?.data.total, [response]);
 
   return (
     <Container id="page-landing">
