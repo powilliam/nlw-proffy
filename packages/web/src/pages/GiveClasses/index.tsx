@@ -57,7 +57,7 @@ const GiveClasses: React.FC = () => {
         });
         reset();
 
-        history.push("/teachers");
+        history.push("/classes");
       }
     },
     [schedules, history]
