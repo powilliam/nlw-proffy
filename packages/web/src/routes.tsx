@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import Landing from "./pages/Landing";
-import Teachers from "./pages/Teachers";
+import Classes from "./pages/Classes";
+import GiveClasses from "./pages/GiveClasses";
 
 const Routes: React.FC = () => (
   <BrowserRouter>
@@ -10,8 +11,12 @@ const Routes: React.FC = () => (
       <Landing />
     </Route>
 
-    <Route path="/teachers">
-      <Teachers />
+    <Route path="/Classes">
+      <Classes />
+    </Route>
+
+    <Route path="/giveclasses">
+      <GiveClasses />
     </Route>
   </BrowserRouter>
 );

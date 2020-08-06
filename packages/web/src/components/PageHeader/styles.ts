@@ -41,6 +41,15 @@ export const Container = styled.header`
     color: var(--color-title-in-primary);
   }
 
+  .header-content p {
+    max-width: 30rem;
+    font-size: 1.6rem;
+    line-height: 2.6rem;
+    color: var(--color-text-in-primary);
+    margin-top: 2.4rem;
+    margin-bottom: 6.4rem;
+  }
+
   @media (min-width: 700px) {
     height: 340px;
 
