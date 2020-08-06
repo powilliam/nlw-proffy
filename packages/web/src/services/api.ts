@@ -7,13 +7,13 @@ const api = axios.create({
   baseURL: "http://localhost:3333",
 });
 
-export interface IGetQueriedClasses {
+export interface IGetQueriedClassesParams {
   week_day: string;
   subject: string;
   time: string;
 }
 export interface IGetQueriedClassesResponse extends Classes {}
-export async function getQueriedClasses(params: IGetQueriedClasses) {
+export async function getQueriedClasses(params: IGetQueriedClassesParams) {
   return await api.get<IGetQueriedClassesResponse[]>("classes", { params });
 }
 

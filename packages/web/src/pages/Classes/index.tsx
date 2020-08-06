@@ -26,7 +26,6 @@ const Classes: React.FC = () => {
 
   const onSubmit = useCallback<SubmitHandler<FormData>>(
     (payload) => {
-      console.log(payload);
       const { subject, time, week_day } = payload;
       if (subject && time && week_day) {
         dispatch({ type: "REQUEST_SEARCH_CLASSES", payload });
