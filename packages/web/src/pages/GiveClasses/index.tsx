@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { FormHandles, SubmitHandler } from "@unform/core";
 import { Form } from "@unform/web";
 
-import api from "../../services/api";
+import { createClass } from "../../services/api";
 
 import PageHeader from "../../components/PageHeader";
 import UncontrolledInput from "../../components/UncontrolledInput";
@@ -27,11 +27,11 @@ const GiveClasses: React.FC = () => {
   const history = useHistory();
 
   const [schedules, setSchedules] = useState(() => [
-    { weekDay: "0", from: "", to: "" },
+    { week_day: "0", from: "", to: "" },
   ]);
 
   const handleCreateNewSchedule = useCallback(
-    () => setSchedules([...schedules, { weekDay: "0", to: "", from: "" }]),
+    () => setSchedules([...schedules, { week_day: "0", to: "", from: "" }]),
     [schedules]
   );
 
@@ -49,7 +49,7 @@ const GiveClasses: React.FC = () => {
     async (data, { reset }) => {
       const { name, avatar, bio, cost, whatsapp } = data;
       if (name && avatar && bio && cost && whatsapp) {
-        await api.post("classes", {
+        await createClass({
           ...data,
           schedules,
         });
@@ -138,7 +138,7 @@ const GiveClasses: React.FC = () => {
                   name={`schedules[${index}].weekDay`}
                   label="Dia da semana"
                   onChange={(e) =>
-                    handleUpdateScheduleItem(index, "weekDay", e.target.value)
+                    handleUpdateScheduleItem(index, "week_day", e.target.value)
                   }
                   options={selectWeekdayOptions}
                 />

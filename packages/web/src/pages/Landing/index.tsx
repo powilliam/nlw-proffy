@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import api from "../../services/api";
+import { getTotalConnections } from "../../services/api";
 
 import Logo from "../../assets/images/logo.svg";
 import LandingImg from "../../assets/images/landing.svg";
@@ -11,15 +11,11 @@ import PurpleHeart from "../../assets/images/icons/purple-heart.svg";
 
 import { Container } from "./styles";
 
-interface TotalConnectionsResponse {
-  total: number;
-}
-
 const Landing: React.FC = () => {
   const [totalConnections, setTotalConnections] = useState(0);
 
   useEffect(() => {
-    api.get<TotalConnectionsResponse>("connections").then((response) => {
+    getTotalConnections().then((response) => {
       const { total } = response.data;
 
       setTotalConnections(total);

@@ -1,8 +1,9 @@
-import React, { useRef, useState, useCallback, useMemo } from "react";
+import React, { useRef, useCallback, useMemo } from "react";
 import { FormHandles, SubmitHandler } from "@unform/core";
 import { Form } from "@unform/web";
-
-import api from "../../services/api";
+import { useSelector, useDispatch } from "react-redux";
+import { IStore } from "../../store";
+import { IClassesState } from "../../reducers/Classes";
 
 import PageHeader from "../../components/PageHeader";
 import ClassCard from "../../components/ClassCard";
@@ -11,44 +12,41 @@ import UncontrolledInput from "../../components/UncontrolledInput";
 
 import { Container } from "./styles";
 
-interface Teacher {
-  id: string;
-  name: string;
-  bio: string;
-  avatar: string;
-  whatsapp: string;
-}
-
-interface GetClassesResponse {
-  id: string;
-  subject: string;
-  cost: number;
-  teacher: Teacher;
-}
-
 interface FormData {
   subject: string;
-  weekDay: string;
+  week_day: string;
   time: string;
 }
 
 const Classes: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const [classes, setClasses] = useState<GetClassesResponse[]>([]);
+  const classes = useSelector<IStore, IClassesState>((state) => state.classes);
+  const dispatch = useDispatch();
 
-  const handleOnSubmit = useCallback<SubmitHandler<FormData>>(
-    async ({ subject, time, weekDay }) => {
-      const { data } = await api.get<GetClassesResponse[]>("classes", {
-        params: { subject, time, week_day: weekDay },
-      });
-
-      setClasses(data);
+  const onSubmit = useCallback<SubmitHandler<FormData>>(
+    (payload) => {
+      console.log(payload);
+      const { subject, time, week_day } = payload;
+      if (subject && time && week_day) {
+        dispatch({ type: "REQUEST_SEARCH_CLASSES", payload });
+      }
     },
-    []
+    [dispatch]
   );
 
-  const uncontroledSelectSubjectOptions = useMemo(
+  const data = useMemo(() => classes.data, [classes]);
+  const uncontrolledSelectSubjectDefaultValue = useMemo(() => classes.subject, [
+    classes,
+  ]);
+  const uncontrolledSelectWeekdayDefaultValue = useMemo(
+    () => classes.week_day,
+    [classes]
+  );
+  const uncontrolledInputTimeDefaultValue = useMemo(() => classes.time, [
+    classes,
+  ]);
+  const uncontrolledSelectSubjectOptions = useMemo(
     () => [
       { value: "Artes", label: "Artes" },
       { value: "Educação Física", label: "Educação Física" },
@@ -64,7 +62,6 @@ const Classes: React.FC = () => {
     ],
     []
   );
-
   const uncontrolledSelectWeekdayOptions = useMemo(
     () => [
       { value: "0", label: "Domingo" },
@@ -81,24 +78,31 @@ const Classes: React.FC = () => {
   return (
     <Container id="page-teacher-list">
       <PageHeader title="Estes são os proffys disponíveis.">
-        <Form ref={formRef} id="search-teachers" onSubmit={handleOnSubmit}>
+        <Form ref={formRef} id="search-teachers" onSubmit={onSubmit}>
           <UncontrolledSelect
             name="subject"
             label="Matéria"
-            options={uncontroledSelectSubjectOptions}
+            defaultValue={uncontrolledSelectSubjectDefaultValue}
+            options={uncontrolledSelectSubjectOptions}
           />
           <UncontrolledSelect
-            name="weekDay"
+            name="week_day"
             label="Dia da semana"
+            defaultValue={uncontrolledSelectWeekdayDefaultValue}
             options={uncontrolledSelectWeekdayOptions}
           />
-          <UncontrolledInput name="time" label="Hora" type="time" />
+          <UncontrolledInput
+            name="time"
+            label="Hora"
+            type="time"
+            defaultValue={uncontrolledInputTimeDefaultValue}
+          />
           <button type="submit">Buscar</button>
         </Form>
       </PageHeader>
 
       <main>
-        {classes?.map((teacherClass) => (
+        {data?.map((teacherClass) => (
           <ClassCard key={teacherClass.id} data={teacherClass} />
         ))}
       </main>

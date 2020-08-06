@@ -21,7 +21,7 @@ export const GlobalStyles = createGlobalStyle`
     --color-box-base: #ffffff;
     --color-box-footer: #fafafc;
 
-    font-size: 60%;
+    font-size: 40%;
   }
 
   * {
@@ -61,7 +61,13 @@ export const GlobalStyles = createGlobalStyle`
 
   @media (min-width: 700px) {
     :root {
-      font-size: 62.5%;
+      font-size: 52%;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    :root {
+      font-size: 62%;
     }
   }
 `;

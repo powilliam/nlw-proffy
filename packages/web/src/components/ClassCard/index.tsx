@@ -1,27 +1,18 @@
 import React, { useMemo, useCallback, memo } from "react";
 
-import api from "../../services/api";
+import { createConnection } from "../../services/api";
+import { Classes } from "../../models/Classes";
 
 import Whatsapp from "../../assets/images/icons/whatsapp.svg";
 
 import { Container } from "./styles";
 
 export interface ClassCardProps {
-  data: {
-    subject: string;
-    cost: number;
-    teacher: {
-      id: string;
-      bio: string;
-      whatsapp: string;
-      name: string;
-      avatar: string;
-    };
-  };
+  data: Classes;
 }
 
 const ClassCard: React.FC<ClassCardProps> = ({ data }) => {
-  const teacherId = useMemo(() => data.teacher.id, [data]);
+  const teacherID = useMemo(() => data.teacher.id && data.teacher.id, [data]);
   const name = useMemo(() => data.teacher.name, [data]);
   const avatar = useMemo(() => data.teacher.avatar, [data]);
   const subject = useMemo(() => data.subject, [data]);
@@ -32,8 +23,8 @@ const ClassCard: React.FC<ClassCardProps> = ({ data }) => {
   ]);
 
   const handleCreateConnection = useCallback(async () => {
-    await api.post(`connections/${teacherId}`, {});
-  }, [teacherId]);
+    await createConnection(teacherID as string);
+  }, [teacherID]);
 
   return (
     <Container>
