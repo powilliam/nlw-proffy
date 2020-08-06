@@ -1,5 +1,5 @@
 export class GetClassesDTO {
-  public weekDay: number;
+  public week_day: number;
   public subject: string;
   public time: string;
 }

@@ -6,7 +6,7 @@ export class CreateClassDTO {
   public subject: string;
   public cost: number;
   public schedules: {
-    weekDay: number;
+    week_day: number;
     from: string;
     to: string;
   }[];

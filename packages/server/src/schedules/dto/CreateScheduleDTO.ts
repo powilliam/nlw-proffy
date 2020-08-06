@@ -1,7 +1,7 @@
 import { Class } from '../../classes/classes.entity';
 
 export class CreateScheduleDTO {
-  public weekDay: number;
+  public week_day: number;
   public from: string;
   public to: string;
   public class: Class;

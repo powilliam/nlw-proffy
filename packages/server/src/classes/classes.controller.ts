@@ -8,12 +8,12 @@ export class ClassesController {
 
   @Get()
   async getClasses(
-    @Query('week_day') weekDay: number,
+    @Query('week_day') week_day: number,
     @Query('subject') subject: string,
     @Query('time') time: string,
   ) {
     return await this.classesService.get({
-      weekDay,
+      week_day,
       subject,
       time,
     });

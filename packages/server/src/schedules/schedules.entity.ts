@@ -6,8 +6,8 @@ export class Schedule {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
-  @Column({ nullable: false, name: 'week_day' })
-  public weekDay: number;
+  @Column({ nullable: false })
+  public week_day: number;
 
   @Column({ nullable: false })
   public from: number;

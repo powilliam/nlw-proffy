@@ -24,7 +24,7 @@ export class ClassesService {
     const schedules = await this.schedulesService.find();
     const availableSchedules = schedules.filter(
       schedule =>
-        Number(dto.weekDay) === schedule.weekDay &&
+        Number(dto.week_day) === schedule.week_day &&
         formatedDtoTime >= schedule.from &&
         formatedDtoTime < schedule.to &&
         schedule.class.subject === dto.subject,
