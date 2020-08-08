@@ -1,6 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
+import api from "../../services/api";
 
 import LandingImg from "../../assets/images/landing.png";
 import Study from "../../assets/images/icons/study.png";
@@ -19,6 +21,8 @@ import {
 } from "./styles";
 
 const Landing: React.FC = () => {
+  const [totalConnections, setTotalConnections] = useState(0);
+
   const { navigate } = useNavigation();
 
   const handleNavigateToGiveClasses = useCallback(
@@ -29,6 +33,12 @@ const Landing: React.FC = () => {
   const handleNavigateToStudy = useCallback(() => navigate("Study"), [
     navigate,
   ]);
+
+  useEffect(() => {
+    api
+      .getTotalConnections()
+      .then((response) => setTotalConnections(response.data.total));
+  }, []);
 
   return (
     <Container>
@@ -48,7 +58,8 @@ const Landing: React.FC = () => {
         </Button>
       </ButtonGroup>
       <Connections>
-        Total de 285 conexões já realizadas <Image source={Heart} />
+        Total de {totalConnections} conexões já realizadas{" "}
+        <Image source={Heart} />
       </Connections>
     </Container>
   );
