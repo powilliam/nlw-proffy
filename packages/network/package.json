@@ -1,0 +1,14 @@
+{
+  "name": "@proffy/network",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "install": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.1",
+    "axios": "^0.19.2"
+  }
+}
