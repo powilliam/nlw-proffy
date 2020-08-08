@@ -22,7 +22,7 @@ export class Class {
   @OneToMany(
     () => Schedule,
     schedule => schedule.class,
-    { onDelete: 'CASCADE', onUpdate: 'CASCADE' },
+    { onDelete: 'CASCADE', onUpdate: 'CASCADE', eager: true },
   )
   public schedules: Schedule[];
 

@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Schedule } from './schedules.entity';
 import { CreateScheduleDTO } from './dto/CreateScheduleDTO';
+import { FindSchedulesDTO } from './dto/FindSchedulesDTO';
 import { convertHourToMinutes } from '../utils';
 
 @Injectable()
@@ -12,8 +13,8 @@ export class SchedulesService {
     private readonly scheduleRepository: Repository<Schedule>,
   ) {}
 
-  async find(): Promise<Schedule[]> {
-    return await this.scheduleRepository.find();
+  async find(options?: FindSchedulesDTO): Promise<Schedule[]> {
+    return await this.scheduleRepository.find(options);
   }
 
   async create(dto: CreateScheduleDTO): Promise<Schedule> {

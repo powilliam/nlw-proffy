@@ -18,7 +18,6 @@ export class Schedule {
   @ManyToOne(() => Class, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
-    eager: true,
   })
   public class: Class;
 }

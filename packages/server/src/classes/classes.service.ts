@@ -1,7 +1,8 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Connection } from 'typeorm';
+import { Repository, Connection, LessThanOrEqual, MoreThan } from 'typeorm';
 import { Class } from './classes.entity';
+import { Schedule } from '../schedules/schedules.entity';
 import { TeachersService } from '../teachers/teachers.service';
 import { SchedulesService } from '../schedules/schedules.service';
 import { GetClassesDTO } from './dto/GetClassesDTO';
@@ -21,16 +22,20 @@ export class ClassesService {
   async get(dto: GetClassesDTO): Promise<Class[]> {
     const formatedDtoTime = convertHourToMinutes(dto.time);
 
-    const schedules = await this.schedulesService.find();
-    const availableSchedules = schedules.filter(
-      schedule =>
-        Number(dto.week_day) === schedule.week_day &&
-        formatedDtoTime >= schedule.from &&
-        formatedDtoTime < schedule.to &&
-        schedule.class.subject === dto.subject,
+    const availableSchedules = await this.schedulesService.find({
+      relations: ['class'],
+      where: {
+        week_day: Number(dto.week_day),
+        from: LessThanOrEqual(formatedDtoTime),
+        to: MoreThan(formatedDtoTime),
+      },
+    });
+
+    const schedulesFilteredBySubject = availableSchedules.filter(
+      schedule => schedule.class.subject === dto.subject,
     );
 
-    return availableSchedules.map(schedule => ({
+    return schedulesFilteredBySubject.map(schedule => ({
       ...schedule.class,
     }));
   }
