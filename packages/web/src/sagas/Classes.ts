@@ -3,8 +3,8 @@ import {
   ISearchClassesAction,
   ISearchClassesPayload,
 } from "../actions/Classes";
-import { Classes } from "../models/Classes";
-import { getQueriedClasses } from "../services/api";
+import { Classes } from "@proffy/network";
+import api from "../services/api";
 
 export interface ISearchClassesSagaPayload extends ISearchClassesPayload {
   data?: Classes[];
@@ -23,7 +23,7 @@ function* searchClasses(action: ISearchClassesAction) {
   });
 
   try {
-    const { data } = yield call(getQueriedClasses, { ...action.payload });
+    const { data } = yield call(api.getQueriedClasses, { ...action.payload });
     yield put<ISearchClassesSagaAction>({
       type: "SUCCESS_SEARCH_CLASSES",
       payload: { ...action.payload, data },

@@ -9,7 +9,8 @@
     "packages": [
       "packages/web",
       "packages/mobile",
-      "packages/server"
+      "packages/server",
+      "packages/network"
     ]
   },
   "devDependencies": {

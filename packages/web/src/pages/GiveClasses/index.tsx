@@ -2,8 +2,9 @@ import React, { useRef, useState, useCallback, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { FormHandles, SubmitHandler } from "@unform/core";
 import { Form } from "@unform/web";
+import { Schedule } from "@proffy/network";
 
-import { createClass } from "../../services/api";
+import api from "../../services/api";
 
 import PageHeader from "../../components/PageHeader";
 import UncontrolledInput from "../../components/UncontrolledInput";
@@ -26,7 +27,7 @@ const GiveClasses: React.FC = () => {
   const uncontroledFormRef = useRef<FormHandles>(null);
   const history = useHistory();
 
-  const [schedules, setSchedules] = useState(() => [
+  const [schedules, setSchedules] = useState<Omit<Schedule, "id">[]>(() => [
     { week_day: "0", from: "", to: "" },
   ]);
 
@@ -49,7 +50,7 @@ const GiveClasses: React.FC = () => {
     async (data, { reset }) => {
       const { name, avatar, bio, cost, whatsapp } = data;
       if (name && avatar && bio && cost && whatsapp) {
-        await createClass({
+        await api.createClass({
           ...data,
           schedules,
         });

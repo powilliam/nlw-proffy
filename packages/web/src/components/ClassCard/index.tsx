@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, memo } from "react";
+import { Classes } from "@proffy/network";
 
-import { createConnection } from "../../services/api";
-import { Classes } from "../../models/Classes";
+import api from "../../services/api";
 
 import Whatsapp from "../../assets/images/icons/whatsapp.svg";
 
@@ -23,7 +23,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ data }) => {
   ]);
 
   const handleCreateConnection = useCallback(async () => {
-    await createConnection(teacherID as string);
+    await api.createConnection(teacherID as string);
   }, [teacherID]);
 
   return (

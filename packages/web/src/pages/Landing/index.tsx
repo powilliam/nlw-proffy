@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
 
-import { getTotalConnections } from "../../services/api";
+import api from "../../services/api";
 
 import Logo from "../../assets/images/logo.svg";
 import LandingImg from "../../assets/images/landing.svg";
@@ -13,7 +13,9 @@ import PurpleHeart from "../../assets/images/icons/purple-heart.svg";
 import { Container } from "./styles";
 
 const Landing: React.FC = () => {
-  const { data: response } = useSWR("connections", () => getTotalConnections());
+  const { data: response } = useSWR("connections", () =>
+    api.getTotalConnections()
+  );
 
   const totalConnections = useMemo(() => response?.data.total, [response]);
 

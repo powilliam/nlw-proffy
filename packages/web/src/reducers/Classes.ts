@@ -1,4 +1,4 @@
-import { Classes } from "../models/Classes";
+import { Classes } from "@proffy/network";
 import { ISearchClassesSagaAction } from "../sagas/Classes";
 
 export interface IClassesState {
